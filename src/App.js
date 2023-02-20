@@ -65,7 +65,9 @@ const fetchData = async (url) => {
 function App() {
   // get the value from the store
   const wordLength = useSelector((state) => state.hangman.wordLength);
+  const wordLengthSelectorDisabled = useSelector((state) => state.hangman.wordLengthSelectorDisabled);
   const wrongKeys = useSelector((state) => state.hangman.wrongKeys);
+
   // link the dispatch
   const dispatch = useDispatch();
 
@@ -189,9 +191,10 @@ function App() {
             sx={{ display: "flex", direction: "row", justifyContent: "center" }}
           >
             <Typography align="center">
-              {wrongKeys === 0
-                ? "Select the Word Length, and click Start to begin. Good luck !!!"
-                : `Wrong keys pressed: ${wrongKeys}`}
+              {!wordLengthSelectorDisabled ? "Select the Word Length, and click 'Start' to begin."
+              : (wrongKeys === 0
+                ? "Good luck !!!"
+                : `Wrong keys pressed: ${wrongKeys}`)}
             </Typography>
           </Grid>
         </Grid>

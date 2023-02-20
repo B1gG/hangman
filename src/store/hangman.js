@@ -30,15 +30,14 @@ export const hangmanSlice = createSlice({
       if (state.wrongKeys === 11) {
         state.showLose = true;
       } else {
+        // update the keys
+        state.clickedKeys = state.clickedKeys + action.payload;
+        // remove the not-discovered letters to update the view
+        const regex = new RegExp("([^" + state.clickedKeys + "])", "g");
+        state.wordProgress = state.word.replace(regex, "_");
         // check if the user has won
-        if ((state.word === state.wordProgress) &&(state.wordProgress !== "")) {
+        if ((state.word === state.wordProgress) && (state.wordProgress !== "")) {
           state.showWin = true;
-        } else {
-          // update the keys
-          state.clickedKeys = state.clickedKeys + action.payload;
-          // remove the not-discovered letters to update the view
-          const regex = new RegExp("([^" + state.clickedKeys + "])", "g");
-          state.wordProgress = state.word.replace(regex, "_");
         }
       }
     },
