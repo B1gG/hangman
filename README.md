@@ -23,13 +23,13 @@ Hangman is a classic word game in which you must guess the secret word one lette
 Star by cloning the repo with
 
 ```bash
-  git clone xxx
+  git clone https://github.com/B1gG/hangman.git
 ```
 Install my-project with npm
 
 ```bash
   cd hangman
-  npm Install
+  npm install
   npm start
 ```
 
