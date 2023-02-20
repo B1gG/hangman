@@ -1,18 +1,27 @@
-import { FormControl, InputLabel, MenuItem, Select } from "@mui/material";
+import {
+  FormControl,
+  InputLabel,
+  MenuItem,
+  Select,
+  Tooltip,
+} from "@mui/material";
 import { useSelector, useDispatch } from "react-redux";
 import { setWordLength } from "../store/hangman";
 
-export default function WordLengthSelector () {
-    // get the value from the store
-    const wordLength = useSelector((state) => state.hangman.wordLength);
+export default function WordLengthSelector() {
+  // get the value from the store
+  const wordLength = useSelector((state) => state.hangman.wordLength);
 
-    // used to dissable the word length selection while in game
-    const wordLengthSelectorDisabled = useSelector((state) => state.hangman.wordLengthSelectorDisabled);
+  // used to dissable the word length selection while in game
+  const wordLengthSelectorDisabled = useSelector(
+    (state) => state.hangman.wordLengthSelectorDisabled
+  );
 
-    // link the dispatch
-    const dispatch = useDispatch();
-  
-    return (
+  // link the dispatch
+  const dispatch = useDispatch();
+
+  return (
+    <Tooltip title="Select the word length" arrow>
       <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
         <InputLabel id="demo-select-small">Word length</InputLabel>
         <Select
@@ -33,5 +42,6 @@ export default function WordLengthSelector () {
           <MenuItem value={13}>13</MenuItem>
         </Select>
       </FormControl>
-    );
-  };
+    </Tooltip>
+  );
+}

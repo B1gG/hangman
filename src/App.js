@@ -12,6 +12,7 @@ import {
   CssBaseline,
   Grid,
   Paper,
+  Tooltip,
   Typography,
 } from "@mui/material";
 import PlayCircleIcon from "@mui/icons-material/PlayCircle";
@@ -49,7 +50,7 @@ const fetchData = async (url) => {
   };
   // do the call and manage the await
   const response = await fetch(url, options);
-  
+
   // this API doesn't return a JSON
   const data = await response.text();
 
@@ -87,67 +88,77 @@ function App() {
     <Container>
       <CssBaseline />
       <Box component={Paper} elevation={6} sx={{ p: 2, mt: 3 }}>
-        <Grid container spacing={3} columns={{ xs: 10 }}>
-          <Grid item xs={4}>
+        <Grid container spacing={1} columns={{ xs: 12, md: 10 }}>
+          <Grid item xs={12} md={5} sx={{ display: "flex", direction: "row" }}>
             <Typography variant="h3">Hangman</Typography>
           </Grid>
 
           <Grid
             item
-            xs={6}
+            xs={12}
+            md={5}
             sx={{
               display: "flex",
-              direction: "column",
+              direction: "row",
               justifyContent: "center",
+              justifyItems: "center",
               alignItems: "center",
             }}
           >
-            <WordLengthSelector />
+            <Box>
+              <WordLengthSelector />
 
-            <Button
-              variant="contained"
-              color="primary"
-              size="small"
-              endIcon={<PlayCircleIcon />}
-              onClick={handleStartClick}
-              sx={{ m: 1 }}
-            >
-              Start
-            </Button>
-            <Button
-              variant="outlined"
-              color="primary"
-              size="small"
-              endIcon={<HelpIcon />}
-              onClick={() => dispatch(setShowHelp(true))}
-              sx={{ m: 1 }}
-            >
-              Help
-            </Button>
-            <Button
-              variant="outlined"
-              color="secondary"
-              size="small"
-              endIcon={<RestartAltIcon />}
-              onClick={() => dispatch(setResetState(true))}
-              sx={{ m: 1 }}
-            >
-              Reset
-            </Button>
+              <Tooltip title="Click to begin" arrow>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  endIcon={<PlayCircleIcon />}
+                  onClick={handleStartClick}
+                  sx={{ m: 1 }}
+                >
+                  Start
+                </Button>
+              </Tooltip>
+            </Box>
+            <Box>
+              <Tooltip title="How to play and rules" arrow>
+                <Button
+                  variant="outlined"
+                  color="primary"
+                  endIcon={<HelpIcon />}
+                  onClick={() => dispatch(setShowHelp(true))}
+                  sx={{ m: 1 }}
+                >
+                  Help
+                </Button>
+              </Tooltip>
+              <Tooltip title="Restart the game" arrow>
+                <Button
+                  variant="outlined"
+                  color="secondary"
+                  endIcon={<RestartAltIcon />}
+                  onClick={() => dispatch(setResetState(true))}
+                  sx={{ m: 1 }}
+                >
+                  Reset
+                </Button>
+              </Tooltip>
+            </Box>
           </Grid>
           <Grid
             item
-            xs={4}
+            xs={12}
+            md={5}
             sx={{
               display: "flex",
-              direction: "column",
+              direction: "row",
               justifyContent: "center",
               alignItems: "center",
             }}
           >
             <ImageProgressDisplay />
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xs={12} md={5}>
             <Box
               sx={{
                 display: "flex",
@@ -161,15 +172,27 @@ function App() {
             <Keyboard />
           </Grid>
 
-          <Grid item xs={4} sx={{ display: "flex", justifyContent: "center" }}>
-            <Typography variant="overline">
+          <Grid
+            item
+            xs={12}
+            md={5}
+            sx={{ display: "flex", direction: "row", justifyContent: "center" }}
+          >
+            <Typography variant="overline" align="center">
               Made with <FavoriteIcon fontSize="string" /> by Gerardo Gonzalez
             </Typography>
           </Grid>
-          <Grid item xs={6} sx={{ display: "flex", justifyContent: "center" }}>
-            {wrongKeys === 0
-              ? "Good luck!!!"
-              : `Wrong keys pressed: ${wrongKeys}`}
+          <Grid
+            item
+            xs={12}
+            md={5}
+            sx={{ display: "flex", direction: "row", justifyContent: "center" }}
+          >
+            <Typography align="center">
+              {wrongKeys === 0
+                ? "Select the Word Length, and click Start to begin. Good luck !!!"
+                : `Wrong keys pressed: ${wrongKeys}`}
+            </Typography>
           </Grid>
         </Grid>
       </Box>
