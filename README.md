@@ -1,4 +1,4 @@
-![Logo](./screenshot.png)
+![Logo](./public/logo192.png)
 
 # Hangman Game
 
@@ -6,6 +6,7 @@ Hangman is a guessing game. The Computer will choose a random word and you tries
 You can select the Word Length, and will have up to 11 wrong responses.
 
 ## Documentation
+![Main Screen](./screenshot.png)
 Hangman is a classic word game in which you must guess the secret word one letter at a time.
 ### Rules:
 - Guess one letter at a time to reveal the secret word.
